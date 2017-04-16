@@ -20,7 +20,7 @@ var buildChartDirective = function(chartType) {
 
       var span = document.createElement('span');
       span.style.display = "none";
-      span.textContent = scope.data.join();
+      span.textContent = (scope.data || []).join();
 
       if (!attrs.class) {
         span.className = "";
@@ -37,7 +37,7 @@ var buildChartDirective = function(chartType) {
       jQuery(span).peity(chartType, options);
 
       var watcher = scope.$watch('data', function(){
-        span.textContent = scope.data.join();
+        span.textContent = (scope.data || []).join();
         jQuery( span ).change();
       }, true);
 
@@ -71,5 +71,11 @@ angularPeity.directive( 'barChart', function () {
 angularPeity.directive( 'lineChart', function () {
 
 	return buildChartDirective( "line" );
+
+} );
+
+angularPeity.directive( 'donutChart', function () {
+
+  return buildChartDirective( "donut" );
 
 } );
